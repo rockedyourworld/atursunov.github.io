@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="mt-2 mb-2">
+        <button id="load" class="float-right btn btn-primary">Load data</button>
+    </div>
+    <div class="mt-2">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th style="background-color:tomato;">Title</th>
+                <th style="background-color:DodgerBlue;">Code</th>
+
+            </tr>
+            </thead>
+            <tbody id="table-body">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#load').click(function () {
+            $.getJSON("https://jsonplaceholder.typicode.com/posts", function (result) {
+                let table = $('#table-body')
+                table.empty();
+                for (const element of result) {
+                    let text = '<tr>' +
+                        '<td style="background-color:DodgerBlue;">' + element.title + '</td>' +
+                        '<td style="background-color:tomato;">' + element.body + '</td>' +
+                        '</tr>';
+                    table.append(text);
+                }
+            });
+        })
+    });
+</script>
+</body>
+</html>

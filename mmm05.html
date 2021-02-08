@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="mt-2 mb-2">
+        <button id="load" class="float-right btn btn-primary">Load data</button>
+    </div>
+    <div class="mt-2">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Code</th>
+                <th>Price</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody id="table-body">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#load').click(function () {
+            $.getJSON("https://nbu.uz/uz/exchange-rates/json/", function (result) {
+                let table = $('#table-body')
+                table.empty();
+                for (const element of result) {
+                    let text = '<tr>' +
+                        '<td>' + element.title + '</td>' +
+                        '<td>' + element.code + '</td>' +
+                        '<td>' + element.cb_price + '</td>' +
+                        '<td>' + element.date.split(' ')[0] + '</td>' +
+                        '</tr>';
+                    table.append(text);
+                }
+            });
+        })
+    });
+</script>
+</body>
+</html>
